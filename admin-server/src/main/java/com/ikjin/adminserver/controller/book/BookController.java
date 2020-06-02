@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BookController {
 
+  @GetMapping("")
+  public String Index() {
+    return "Index html";
+  }
+
   @GetMapping("/hello")
   public String Hello() {
     return "Hello world";
