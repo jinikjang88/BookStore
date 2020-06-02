@@ -31,7 +31,6 @@ public class BookRentalController {
   public BookRentalEntity createBookRental(
       @PathVariable("bookId") UUID bookId,
       @RequestBody BookRentalEntity bookRentalEntity) {
-
     BookRentalEntity created = null;
 
     BookEntity bookEntity = bookRepository.findById(bookId).orElse(null);
