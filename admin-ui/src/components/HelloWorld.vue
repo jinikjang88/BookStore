@@ -2,6 +2,16 @@
   <div class="hello">
     {{ text }}
     <div id="map" style="width:500px;height:400px;"></div>
+    <a id="kakao-link-btn" @click="sendLink()">
+    <img
+        src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+    />
+    </a> <br >
+    <a id="create-kakao-link-btn" @click="sendCreateLink()">
+      <img
+          src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+      />
+    </a>
   </div>
 </template>
 
@@ -12,7 +22,7 @@ export default {
     msg: String
   },
   data: () => ({
-    text: "사랑해요 박빛나"
+    text: ""
   }),
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -21,7 +31,7 @@ export default {
       const script = document.createElement('script');
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
-      script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=2703d008acfd312ffabb10166bc37173';
+      script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f9419f8ddb1d60fd0304da91cf250f0b';
       document.head.appendChild(script);
     }
   },
@@ -35,6 +45,84 @@ export default {
 
       var map = new kakao.maps.Map(container, options);
       map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+    },
+    sendLink() {
+      console.log(window.Kakao)
+      window.Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '디저트 사진',
+          description: '아메리카노, 빵, 케익',
+          imageUrl:
+              'https://adm-cdn.baemin.com/upload/offline/course/197.jpg',
+          link: {
+            mobileWebUrl: 'https://jinikjang88.github.io/',
+            androidExecParams: 'test',
+          },
+        },
+        social: {
+          likeCount: 10,
+          commentCount: 20,
+          sharedCount: 30,
+        },
+        buttons: [
+          {
+            title: '웹으로 이동',
+            link: {
+              mobileWebUrl: 'https://jinikjang88.github.io/',
+            },
+          },
+          {
+            title: '앱으로 이동',
+            link: {
+              mobileWebUrl: 'https://jinikjang88.github.io/',
+            },
+          },
+        ],
+        success: function(response) {
+          console.log(response);
+        },
+        fail: function(error) {
+          console.log(error);
+        }
+      });
+    },
+    sendCreateLink() {
+      window.Kakao.Link.createDefaultButton({
+        container: '#create-kakao-link-btn',
+        objectType: 'feed',
+        content: {
+          title: '딸기 치즈 케익',
+          description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+          imageUrl:
+              'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+          {
+            title: '앱으로 보기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+        ],
+      })
     }
   }
 }
