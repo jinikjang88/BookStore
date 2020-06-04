@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <h1> Hello App! </h1>
+    <p>
+    </p>
+    이 사이에 뷰 라우터 가 있슴다
+    <router-view></router-view>
+    이 사이에 뷰 라우터 가 있슴다
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -11,6 +17,10 @@ export default {
   name: 'App',
   components: {
     HelloWorld,
+  },
+  computed: {
+  },
+  method: {
   }
 }
 </script>
