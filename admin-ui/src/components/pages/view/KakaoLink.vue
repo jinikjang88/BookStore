@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'KakaoLink',
   props: {
     msg: String
   },

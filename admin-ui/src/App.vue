@@ -1,26 +1,35 @@
 <template>
   <div id="app">
-    <h1> Hello App! </h1>
-    <p>
-    </p>
-    이 사이에 뷰 라우터 가 있슴다
+    <Header/>
     <router-view></router-view>
-    이 사이에 뷰 라우터 가 있슴다
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from '@/components/pages/common/header.vue'
+import Footer from '@/components/pages/common/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Header,
+    Footer,
   },
   computed: {
+    username () {
+      return this.$route.params.username
+    }
   },
   method: {
+    goBack () {
+      window.history.length > 1
+          ? this.$router.go(-1)
+          : this.$router.push('/')
+    },
+    go ( targetName ) {
+      this.$router.push(targetName)
+    }
   }
 }
 </script>
